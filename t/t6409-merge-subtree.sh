@@ -72,9 +72,9 @@ test_expect_success 'setup' '
 	mkdir git &&
 	cd git &&
 	git init &&
-	echo git >git.c &&
-	o2=$(git hash-object git.c) &&
-	git add git.c &&
+	echo git >main.c &&
+	o2=$(git hash-object main.c) &&
+	git add main.c &&
 	git commit -m "initial git"
 '
 
@@ -87,7 +87,7 @@ test_expect_success 'initial merge' '
 	git ls-files -s >actual &&
 	(
 		echo "100644 $o1 0	git-gui/git-gui.sh" &&
-		echo "100644 $o2 0	git.c"
+		echo "100644 $o2 0	main.c"
 	) >expected &&
 	test_cmp expected actual
 '
@@ -104,7 +104,7 @@ test_expect_success 'merge update' '
 	git ls-files -s >actual &&
 	(
 		echo "100644 $o3 0	git-gui/git-gui.sh" &&
-		echo "100644 $o2 0	git.c"
+		echo "100644 $o2 0	main.c"
 	) >expected &&
 	test_cmp expected actual
 '
@@ -121,7 +121,7 @@ test_expect_success 'initial ambiguous subtree' '
 	(
 		echo "100644 $o1 0	git-gui/git-gui.sh" &&
 		echo "100644 $o1 0	git-gui2/git-gui.sh" &&
-		echo "100644 $o2 0	git.c"
+		echo "100644 $o2 0	main.c"
 	) >expected &&
 	test_cmp expected actual
 '
@@ -134,7 +134,7 @@ test_expect_success 'merge using explicit' '
 	(
 		echo "100644 $o3 0	git-gui/git-gui.sh" &&
 		echo "100644 $o1 0	git-gui2/git-gui.sh" &&
-		echo "100644 $o2 0	git.c"
+		echo "100644 $o2 0	main.c"
 	) >expected &&
 	test_cmp expected actual
 '
@@ -147,7 +147,7 @@ test_expect_success 'merge2 using explicit' '
 	(
 		echo "100644 $o1 0	git-gui/git-gui.sh" &&
 		echo "100644 $o3 0	git-gui2/git-gui.sh" &&
-		echo "100644 $o2 0	git.c"
+		echo "100644 $o2 0	main.c"
 	) >expected &&
 	test_cmp expected actual
 '
